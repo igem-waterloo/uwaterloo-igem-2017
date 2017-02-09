@@ -14,7 +14,7 @@ class Anon(object):
         self.POLICY_RANGE = range(28, 36)
         self.BUSINESS_RANGE = range(36, 40)
         self.NAME_KEY = 'name_key.csv'
-        self.subteam_mappings = {
+        self.SUBTEAM_MAPPINGS = {
             "LAB": "Lab and Design",
             "MAT": "Mathematical Modelling",
             "PNP": "Policy and Practices",
@@ -40,7 +40,6 @@ class Anon(object):
                 names.append('{}, {}'.format(app[self.NAME_COL], app[self.EMAIL_COL]))
                 app_file_name = "Applicant_{}_".format(i)
                 subteam_apps = {}
-                cols = list(self.ALL_RANGE)
                 if answer_in_range(self.MATH_RANGE, app):
                     subteam_apps["MAT"] = self.ALL_RANGE + self.MATH_RANGE
                 if answer_in_range(self.LAB_RANGE, app):
@@ -51,18 +50,18 @@ class Anon(object):
                     subteam_apps["BUS"] = self.ALL_RANGE + self.BUSINESS_RANGE
 
                 for subteam in subteam_apps:
-                    html_out =   """<html><head><style type=\"text/css\">
-                                    div.wrapper {{
-                                    width: 700px;
-                                    padding: 20px 50px;
-                                    background: #d6dcde;
-                                    font-family: Helvetica, Sans-serif;
-                                    }}
-                                    </style></head>
-                                    <body>
-                                    <div class=\"wrapper\">
-                                    <h1>Applicant_{}</h1>
-                                    <h2>{}</h2>""".format(i, self.subteam_mappings[subteam])
+                    html_out = """<html><head><style type=\"text/css\">
+                                div.wrapper {{
+                                width: 700px;
+                                padding: 20px 50px;
+                                background: #d6dcde;
+                                font-family: Helvetica, Sans-serif;
+                                }}
+                                </style></head>
+                                <body>
+                                <div class=\"wrapper\">
+                                <h1>Applicant_{}</h1>
+                                <h2>{}</h2>""".format(i, self.SUBTEAM_MAPPINGS[subteam])
 
                     for col in subteam_apps[subteam]:
                         question = col_names[col]
