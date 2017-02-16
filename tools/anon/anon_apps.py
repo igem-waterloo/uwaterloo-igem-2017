@@ -73,7 +73,7 @@ class Anon(object):
                     with open(app_file_name + subteam + ".html", 'w') as app_file:
                         app_file.write(html_out)
 
-            name_key = ['{}, {}'.format(i, name) for i, name in enumerate(names)]
+            name_key = ['{}, {}'.format(i + 1, name) for i, name in enumerate(names)]
             with open(self.NAME_KEY, 'w') as nk:
                 nk.write('\n'.join(name_key))
 
