@@ -35,7 +35,7 @@ def ExpectedValue(length):
 		result += i * A(length,i) ;	
 
 	result /= pow(2,length);
-	print(result);
+	print "Number of expected fluorescing locations on an amyloid of length ", length,": ", result; 
 	return result;
 
 ExpectedValue(10);
