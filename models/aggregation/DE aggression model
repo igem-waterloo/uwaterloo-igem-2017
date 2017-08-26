@@ -1,0 +1,20 @@
+
+# equations
+
+par k1=1, k2=1, k3=1, k4=1, k5=1, k6=1, k7=1, k8=1
+
+da/dt=k1-k2*a-k4*a*b-k7
+
+db/dt=k1-k3*b-k4*a*b-k8
+
+dc/dt=k4*a*b-k5*c
+
+dd/dt=k2*a+k3*b+k5*c-k6*d
+
+# initial conditions
+init a=1, b=1, c=0, d=0 
+
+# final time
+@ total=100
+# set the plotting window size:
+@ xlo=0, xhi=10, ylo=0, yhi=-10
