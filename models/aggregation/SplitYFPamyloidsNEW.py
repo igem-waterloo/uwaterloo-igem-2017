@@ -11,11 +11,11 @@ def binom(n, k):
 
 #This is the \#(n,k) function I defined in my writeup...
 def num(n, k):
-	return binom(n - k - 1, k)
+	return binom(n - k, k)
 
 #This is the A(n,k) function I defined in my writeup...
 def A(n, k):
-	return pow(2, k) * num(n - 2, k - 1) + pow(2, k + 1) * num(n - 1, k)
+	return pow(2, k) * num(n - 2,k - 1) + pow(2, k + 1) * num(n - 1, k)
 
 #The expected number of fluorescing locations in a length n
 #amyloid, according to formula I derived, is:
@@ -25,12 +25,11 @@ def expected_value(length):
 		result += i * A(length, i)
 
 	result /= pow(2, length)
-	print "Number of expected fluorescing locations on an amyloid of length {}: {}".format(length, result)
 	return result
 
-expected_value(10)
-expected_value(50)
-expected_value(75)
-expected_value(100)
-expected_value(1000)
-expected_value(1010)
+
+if __name__ == '__main__':
+    print "Ratio of expected fluorescing proteins  on an amyloid of length {}: {}"
+    for i in range(2, 1000):
+	print "{}: {}".format(i, 2 * expected_value(i) / i)
+
