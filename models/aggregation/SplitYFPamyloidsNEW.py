@@ -25,21 +25,11 @@ def expected_value(length):
 		result += i * A(length, i)
 
 	result /= pow(2, length)
-	#print "Number of expected fluorescing locations on an amyloid of length {}: {}".format(length, result)
 	return result
 
 
+if __name__ == '__main__':
+    print "Ratio of expected fluorescing proteins  on an amyloid of length {}: {}"
+    for i in range(2, 1000):
+	print "{}: {}".format(i, 2 * expected_value(i) / i)
 
-
-print "Ratio of expected fluorescing proteins  on an amyloid of length {}: {}"
-
-
-for i in range(2, int(1000)):
-	print "{}: {}".format(i,2 * expected_value(i)/i)
-
-#expected_value(10)
-#expected_value(50)
-#expected_value(75)
-#expected_value(100)
-#expected_value(1000)
-#expected_value(1010)
