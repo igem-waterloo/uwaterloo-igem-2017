@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import itertools
 import math
 import matplotlib.pyplot as plt
 #The binomial coefficient nCk...
@@ -11,19 +11,43 @@ def binom(n, k):
 	c = math.factorial(n - k)
 	return a / (b * c)
 
-#This is the \#(n,k) function I defined in my writeup...
-def num(n, k):
-	return binom(n - k, k)
+
+def a(n):
+	if n = 0:
+		return 0
+	else if n > 0:
+		x = math.sqrt(2)
+		
+		result = ((3+2*x) /(x + 2)) * pow((1 / (-1 - x)),n) + ((2*x - 3)/(x-2)) * pow((1 / (x - 1)),n)
+		return result
+
+def b(n):
+	x = math.sqrt(2)
+	result = (1/(2 * x + 2)) * pow((1/(-1 - x)),n) + (1/(2 - 2*x)) * pow((1/(x - 1)),n)
+	return result
+
+		
+
+
 
 #This is the A(n,k) function I defined in my writeup...
 def A(n, k):
-	return pow(2, k) * num(n - 2,k - 1) + pow(2, k + 1) * num(n - 1, k)
+	result = 0.0
+	for q in xrange(0, n):
+ 		
+		lists = itertools.combinations(iterable, k + 1)
+		Lists = [x for x in lists if sum(x) == n - q]
+		pseudoResult = 1.0
+		for x in Lists
+			
+				 
+		result+= 
 
 #The expected number of fluorescing locations in a length n
 #amyloid, according to formula I derived, is:
 def expected_value(length):
 	result = 0.0
-	for i in range(0, int(length / 2)):
+	for i in xrange(0, int(length / 2)):
 		result += i * A(length, i)
 
 	result /= pow(2, length)
