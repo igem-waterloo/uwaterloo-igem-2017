@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import itertools
 import math
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #The binomial coefficient nCk...
 def binom(n, k):
 	if k > n or k < 0:
@@ -13,9 +13,9 @@ def binom(n, k):
 
 
 def a(n):
-	if n = 0:
+	if n == 0:
 		return 0
-	else if n > 0:
+	elif n > 0:
 		x = math.sqrt(2)
 		
 		result = ((3+2*x) /(x + 2)) * pow((1 / (-1 - x)),n) + ((2*x - 3)/(x-2)) * pow((1 / (x - 1)),n)
@@ -37,12 +37,14 @@ def A(n, k):
  		
 		lists = itertools.combinations(iterable, k + 1)
 		Lists = [x for x in lists if sum(x) == n - q]
-		pseudoResult = 1.0
-		for x in Lists
+		for x in Lists:		
+			pseudoResult = 1.0
+			for i in x:
+				pseudoResult *= a(i)
 			
-				 
-		result+= 
-
+			result += b(q) * pseudoResult			
+	
+	return result	
 #The expected number of fluorescing locations in a length n
 #amyloid, according to formula I derived, is:
 def expected_value(length):
@@ -66,15 +68,15 @@ if __name__ == '__main__':
 		data.append(r)
 
 
-fig1 = plt.figure()
+#fig1 = plt.figure()
 
-  
-l = plt.plot(range(len(data)), data, 'r-')
+3  
+#l = plt.plot(range(len(data)), data, 'r-')
 
-plt.xlim(0, len(data))
-plt.ylim(0, max(data) * 1.2)
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('SCIENCE')
+#plt.xlim(0, len(data))
+#plt.ylim(0, max(data) * 1.2)
+#plt.xlabel('x')
+#plt.ylabel('y')
+#plt.title('SCIENCE')
 
-plt.show()
+#plt.show()
