@@ -18,13 +18,14 @@ def a(n):
 	elif n > 0:
 		x = math.sqrt(2)
 		
-		result = ((3+2*x) /(x + 2)) * pow((1 / (-1 - x)),n) + ((2*x - 3)/(x-2)) * pow((1 / (x - 1)),n)
+		result = ((3+2*x) /(x + 2) * 1.0) * pow((1.0 / (-1.0 - x)),n) + ((2*x - 3)/(x-2) * 1.0) * pow((1.0 / (x - 1)),n)
 		return result
 
 def b(n):
 	x = math.sqrt(2)
-	result = (1/(2 * x + 2)) * pow((1/(-1 - x)),n) + (1/(2 - 2*x)) * pow((1/(x - 1)),n)
-	return result
+
+	result = (1.0/(2 * x + 2)) * pow((1.0/(-1 - x)),n) + (1.0/(2 - 2*x)) * pow((1.0/(x - 1)),n)
+	return -1 *result
 
 		
 
@@ -34,16 +35,16 @@ def b(n):
 def A(n, k):
 	result = 0.0
 	for q in xrange(0, n):
- 		
-		lists = itertools.combinations(iterable, k + 1)
+ 			
+		lists = itertools.combinations(range(0,k), k + 1)
 		Lists = [x for x in lists if sum(x) == n - q]
+		
 		for x in Lists:		
 			pseudoResult = 1.0
 			for i in x:
 				pseudoResult *= a(i)
-			
 			result += b(q) * pseudoResult			
-	
+				
 	return result	
 #The expected number of fluorescing locations in a length n
 #amyloid, according to formula I derived, is:
@@ -52,7 +53,7 @@ def expected_value(length):
 	for i in xrange(0, int(length / 2)):
 		result += i * A(length, i)
 
-	result /= pow(2, length)
+	result /= pow(3, length)
 	return result
 
 
@@ -64,6 +65,8 @@ if __name__ == '__main__':
 	print "Ratio of expected fluorescing proteins  on an amyloid of length {}: {}"
 	for i in range(2, 1000):
 		r = 2 * expected_value(i) / i 
+		print "{}".format(a(i))
+		print "{}".format(b(i))
 		print "{}: {}".format(i, r)
 		data.append(r)
 
