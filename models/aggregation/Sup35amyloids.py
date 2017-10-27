@@ -34,9 +34,9 @@ def b(n):
 #This is the A(n,k) function I defined in my writeup...
 def A(n, k):
 	result = 0.0
-	for q in xrange(0, n):
+	for q in xrange(0, n + 1):
  			
-		lists = itertools.combinations(range(0,k), k + 1)
+		lists = itertools.product(range(0,k + 1), repeat=k + 1)
 		Lists = [x for x in lists if sum(x) == n - q]
 		
 		for x in Lists:		
@@ -50,7 +50,7 @@ def A(n, k):
 #amyloid, according to formula I derived, is:
 def expected_value(length):
 	result = 0.0
-	for i in xrange(0, int(length / 2)):
+	for i in xrange(0, int(length / 2) + 1):
 		result += i * A(length, i)
 
 	result /= pow(3, length)
@@ -60,20 +60,13 @@ def expected_value(length):
 
 
 if __name__ == '__main__':
-	data = []
-		
-	print "Ratio of expected fluorescing proteins  on an amyloid of length {}: {}"
 	for i in range(2, 1000):
 		r = 2 * expected_value(i) / i 
-		print "{}".format(a(i))
-		print "{}".format(b(i))
 		print "{}: {}".format(i, r)
-		data.append(r)
 
 
 #fig1 = plt.figure()
 
-3  
 #l = plt.plot(range(len(data)), data, 'r-')
 
 #plt.xlim(0, len(data))
