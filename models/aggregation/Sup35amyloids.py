@@ -25,25 +25,26 @@ def b(n):
 	x = math.sqrt(2)
 
 	result = (1.0/(2 * x + 2)) * pow((1.0/(-1 - x)),n) + (1.0/(2 - 2*x)) * pow((1.0/(x - 1)),n)
-	return -1 *result
+	return -1 * result
 
 		
-
-
 
 #This is the A(n,k) function I defined in my writeup...
 def A(n, k):
 	result = 0.0
-	for q in xrange(0, n + 1):
+	for q in xrange(0, n + 1 - 2 * k):
  			
-		lists = itertools.product(range(0,k + 1), repeat=k + 1)
+		lists = itertools.product(range(2,n-q-2 * (k - 1)), repeat=k)
 		Lists = [x for x in lists if sum(x) == n - q]
-		
+	
+		innerSum = 0.0
 		for x in Lists:		
-			pseudoResult = 1.0
-			for i in x:
-				pseudoResult *= a(i)
-			result += b(q) * pseudoResult			
+			innerProduct = 1.0
+			for phi_i in x:
+				innerProduct *= a(phi_i)
+			innerSum += innerProduct	
+		result +=	b(q) * innerSum
+					
 				
 	return result	
 #The expected number of fluorescing locations in a length n
@@ -60,7 +61,7 @@ def expected_value(length):
 
 
 if __name__ == '__main__':
-	for i in range(2, 1000):
+	for i in xrange(2, 1000):
 		r = 2 * expected_value(i) / i 
 		print "{}: {}".format(i, r)
 
