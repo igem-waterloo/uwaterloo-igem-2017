@@ -11,11 +11,11 @@ def binom(n, k):
     c = math.factorial(n - k)
     return a / (b * c)
 
-def a(n):
-    if n == 0:
+def a(n,y):
+    if n <= y:
         return 0
     x = math.sqrt(2)
-    result = ((3 + 2 * x) / (x + 2) * 1.0) * pow((1.0 / (-1.0 - x)), n) + ((2 * x - 3) / (x - 2) * 1.0) * pow((1.0 / (x - 1)), n)
+    result = - ((4 + 3 * x) / (x + 2) * 1.0) * pow((1.0 / (-1.0 - x)), n - y) - ((4 - 3 * x) / (2 - x) * 1.0) * pow((1.0 / (x - 1)), n - y)
     return result
 
 def b(n):
@@ -32,15 +32,19 @@ def product(lst):
 #This is the A(n,k) function I defined in my writeup...
 def A(n, k):
     result = 0.0
-    for q in xrange(0, n + 1 - 2 * k):
-        all_lists = itertools.product(range(2, n - q - 2 * (k - 1)), repeat=k)
-        lists_of_sum_n = [lst for lst in all_lists if sum(lst) == n - q]
+    for q in xrange(0, n - k + 1):
         innerSum = 0.0
-        for lst in lists_of_sum_n:
-            a_lst = [a(phi_i) for phi_i in lst]
-            innerSum += product(a_lst)
+        for i in xrange(1, k + 1):
+            all_lists = itertools.product(xrange(1, n - q + 1), repeat=i)
+            lists_of_psi = [lst for lst in all_lists if sum(lst) == k]
+            all_lists = itertools.product(xrange(2, n - q + 1), repeat=i)
+            lists_of_sum_n = [lst for lst in all_lists if sum(lst) == n - q]
+            for lst in lists_of_sum_n:
+                for lst2 in lists_of_psi:
+                    fin = zip(lst,lst2)
+                    a_lst = [a(x,y) for x,y in fin]
+                    innerSum += product(a_lst)
         result += b(q) * innerSum
-
     return result
 
 #The expected number of fluorescing locations in a length n
@@ -49,10 +53,12 @@ def expected_value(length):
     result = 0.0
     for i in xrange(0, length / 2 + 1):
         result += i * A(length, i)
-    result /= pow(3, length)
+    result /= pow(3.0, length)
     return result
 
 if __name__ == '__main__':
-    for i in xrange(2, 1000):
-        r = 2 * expected_value(i) / i
+    #lst = xrange(10)
+    #print "{}".format(lst[100])
+    for i in xrange(1, 1000):
+        r = expected_value(i) / i
         print "{}: {}".format(i, r)
